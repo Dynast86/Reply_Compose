@@ -1,0 +1,99 @@
+package com.dynast.replycompose.ui.compose
+
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.dynast.replycompose.R
+import com.dynast.replycompose.ui.theme.ReplyComposeTheme
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun SubjectWidget(
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit
+) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusRequester by remember { mutableStateOf(FocusRequester()) }
+    var textState by remember { mutableStateOf(TextFieldValue()) }
+    val actions = KeyboardActions(
+        onSearch = { keyboardController?.hide() }
+    )
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .heightIn(min = 48.dp)
+            .padding(horizontal = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        IconButton(onClick = { onClick("Close") }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_close),
+                contentDescription = stringResource(id = R.string.compose_close_content_desc)
+            )
+        }
+        BasicTextField(
+            modifier = Modifier
+                .weight(1f)
+                .padding(horizontal = 16.dp)
+                .focusRequester(focusRequester = focusRequester),
+            value = textState,
+            onValueChange = {
+                textState = it
+            },
+            cursorBrush = SolidColor(MaterialTheme.colorScheme.tertiary),
+            decorationBox = { innerTextField ->
+                if (textState.text.isEmpty()) {
+                    Text(
+                        text = stringResource(id = R.string.compose_subject_hint),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                }
+                innerTextField()
+            },
+            textStyle = MaterialTheme.typography.titleLarge,
+            singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
+            keyboardActions = actions
+        )
+        IconButton(onClick = { onClick("Send") }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_twotone_send),
+                contentDescription = stringResource(id = R.string.compose_send_content_desc)
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SubjectWidgetPreview() {
+    ReplyComposeTheme {
+        SubjectWidget {
+
+        }
+    }
+}

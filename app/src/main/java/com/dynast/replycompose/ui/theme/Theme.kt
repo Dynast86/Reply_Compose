@@ -12,15 +12,39 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = replyBlue200,
+    secondary = replyOrange300,
+    tertiary = replyOrange300,
+    error = replyRed200,
+
+    background = replyBlack900,
+    surface = replyBlack800,
+
+    onPrimary = replyBlack900,
+    onSecondary = replyBlack900,
+    onBackground = replyWhite50,
+    onSurface = replyWhite50,
+    onError = replyBlack900,
+
+//<item name="colorPrimaryVariant">@color/reply_blue_300</item>
+//<item name="colorPrimarySurfaceVariant">?attr/colorSurface</item>
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = replyBlue700,
+    secondary = replyOrange500,
+    tertiary = replyOrange400,
+    error = replyRed400,
+
+    background = replyBlue50,
+    surface = replyWhite50,
+
+    onPrimary = replyWhite50,
+    onSecondary = replyBlack900,
+    onBackground = replyBlack900,
+    onSurface = replyBlack900,
+    onError = replyBlack900,
+
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -31,13 +55,19 @@ private val LightColorScheme = lightColorScheme(
     onBackground = Color(0xFF1C1B1F),
     onSurface = Color(0xFF1C1B1F),
     */
+
+//<item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>
+//
+//<item name="scrimBackground">@color/reply_white_50_alpha_060</item>
+//<item name="android:statusBarColor">@color/reply_blue_50_alpha_060</item>
+//<item name="android:navigationBarColor">@color/nav_bar</item>
 )
 
 @Composable
 fun ReplyComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -59,6 +89,7 @@ fun ReplyComposeTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content
+        content = content,
+        shapes = Shapes
     )
 }

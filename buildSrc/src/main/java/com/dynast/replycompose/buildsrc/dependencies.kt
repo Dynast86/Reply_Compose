@@ -99,6 +99,7 @@ object Libs {
                 const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
                 const val uiTestManifest = "androidx.compose.ui:ui-test-manifest:$version"
                 const val uiTestJUnit = "androidx.compose.ui:ui-test-junit4:$version"
+                const val uiFont = "androidx.compose.ui:ui-text-google-fonts:$version"
             }
         }
 

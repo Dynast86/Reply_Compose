@@ -30,8 +30,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -47,6 +47,9 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    kotlin.sourceSets.all{
+        languageSettings.optIn("kotlin.RequiresOptIn")
+    }
 }
 
 dependencies {
@@ -55,6 +58,7 @@ dependencies {
 
     implementation(Libs.AndroidX.Compose.Ui.ui)
     implementation(Libs.AndroidX.Compose.Ui.uiToolingPreview)
+    implementation(Libs.AndroidX.Compose.Ui.uiFont)
     debugImplementation(Libs.AndroidX.Compose.Ui.uiTooling)
     debugImplementation(Libs.AndroidX.Compose.Ui.uiTestManifest)
     androidTestImplementation(Libs.AndroidX.Compose.Ui.uiTestJUnit)
