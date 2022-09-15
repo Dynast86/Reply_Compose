@@ -1,6 +1,7 @@
 package com.dynast.replycompose.ui.search
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,6 +21,9 @@ fun SuggestItemWidget(
     Box(
         modifier = modifier
             .fillMaxWidth()
+            .clickable {
+
+            }
             .padding(horizontal = 24.dp, vertical = 16.dp),
     ) {
         Row(

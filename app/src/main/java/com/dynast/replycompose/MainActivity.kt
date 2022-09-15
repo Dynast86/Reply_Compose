@@ -6,12 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.dynast.replycompose.ui.compose.ComposeContent
-import com.dynast.replycompose.ui.search.SearchContent
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.dynast.replycompose.ui.nav.NavGraph
+import com.dynast.replycompose.ui.nav.NavItem
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,26 +20,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ReplyComposeTheme {
+                val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
 //                    SearchContent()
 //                    EmailContent()
-                    ComposeContent()
+//                    ComposeContent()
+//                    HomeContent()
+                    NavGraph(navController = navController, startDestination = NavItem.Home.route)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!", style = MaterialTheme.typography.titleMedium)
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ReplyComposeTheme {
-        Greeting("Android")
     }
 }

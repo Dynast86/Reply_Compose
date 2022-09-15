@@ -12,24 +12,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.dynast.replycompose.R
 import com.dynast.replycompose.temp.search.thisWeekSuggestions
 import com.dynast.replycompose.temp.search.yesterdaySuggestions
 import com.dynast.replycompose.ui.components.TopBarWidget
+import com.dynast.replycompose.ui.nav.NavItem
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onBackClicked: () -> Unit
 ) {
     Scaffold(
         topBar = {
             Column {
-                TopBarWidget {
-                    println("Click : $it")
+                TopBarWidget { item ->
+                    when (item) {
+                        NavItem.Close -> onBackClicked()
+                        else -> Unit
+                    }
                 }
-                Divider(thickness = Dp.Hairline)
+                Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f), thickness = 1.dp)
             }
         },
         containerColor = MaterialTheme.colorScheme.surface
@@ -58,6 +64,8 @@ fun SearchContent(
 @Composable
 fun SearchContentPreview() {
     ReplyComposeTheme {
-        SearchContent()
+        SearchContent {
+
+        }
     }
 }

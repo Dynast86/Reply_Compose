@@ -21,13 +21,14 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dynast.replycompose.R
+import com.dynast.replycompose.ui.nav.NavItem
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
 import com.dynast.replycompose.ui.theme.emphasisDisabledAlpha
 
 @Composable
 fun SubjectWidget(
     modifier: Modifier = Modifier,
-    onClick: (String) -> Unit
+    onClick: (NavItem) -> Unit
 ) {
     val focusRequester by remember { mutableStateOf(FocusRequester()) }
     var textState by remember { mutableStateOf(TextFieldValue()) }
@@ -38,7 +39,7 @@ fun SubjectWidget(
             .heightIn(min = 48.dp)
             .padding(horizontal = 8.dp)
     ) {
-        IconButton(onClick = { onClick("Close") }) {
+        IconButton(onClick = { onClick(NavItem.Close) }) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_close),
                 contentDescription = stringResource(id = R.string.compose_close_content_desc),
@@ -69,7 +70,9 @@ fun SubjectWidget(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             ),
         )
-        IconButton(onClick = { onClick("Send") }) {
+        IconButton(onClick = {
+
+        }) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_twotone_send),
                 contentDescription = stringResource(id = R.string.compose_send_content_desc),

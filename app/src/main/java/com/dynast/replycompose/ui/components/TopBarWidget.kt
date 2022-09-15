@@ -23,13 +23,14 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dynast.replycompose.R
+import com.dynast.replycompose.ui.nav.NavItem
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TopBarWidget(
     modifier: Modifier = Modifier,
-    onClick: (String) -> Unit
+    onClick: (NavItem) -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester by remember { mutableStateOf(FocusRequester()) }
@@ -41,14 +42,14 @@ fun TopBarWidget(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(48.dp)
+            .heightIn(56.dp)
             .padding(horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = { onClick("Back") }) {
+        IconButton(onClick = { onClick(NavItem.Close) }) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_arrow_back),
-                contentDescription = "Back",
+                contentDescription = "Close",
                 tint = MaterialTheme.colorScheme.primary
             )
         }
@@ -75,7 +76,9 @@ fun TopBarWidget(
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
             keyboardActions = actions
         )
-        IconButton(onClick = { onClick("Mic") }) {
+        IconButton(onClick = {
+
+        }) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_mic),
                 contentDescription = "Mic",
