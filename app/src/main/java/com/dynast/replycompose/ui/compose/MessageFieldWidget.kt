@@ -1,13 +1,11 @@
 package com.dynast.replycompose.ui.compose
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
@@ -15,40 +13,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.dynast.replycompose.R
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
-import com.dynast.replycompose.ui.theme.emphasisDisabledAlpha
 
 @Composable
-fun SubjectWidget(
-    modifier: Modifier = Modifier,
-    onClick: (String) -> Unit
+fun MessageFieldWidget(
+    modifier: Modifier = Modifier
 ) {
     val focusRequester by remember { mutableStateOf(FocusRequester()) }
     var textState by remember { mutableStateOf(TextFieldValue()) }
 
-    Row(
+    Box(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 48.dp)
-            .padding(horizontal = 8.dp)
+            .heightIn(min = 250.dp)
+            .padding(start = 16.dp, top = 16.dp, end = 16.dp)
     ) {
-        IconButton(onClick = { onClick("Close") }) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_close),
-                contentDescription = stringResource(id = R.string.compose_close_content_desc),
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = emphasisDisabledAlpha)
-            )
-        }
         BasicTextField(
             modifier = Modifier
-                .weight(1f)
-                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .matchParentSize()
+                .padding(bottom = 32.dp)
                 .focusRequester(focusRequester = focusRequester),
             value = textState,
             onValueChange = {
@@ -58,24 +47,18 @@ fun SubjectWidget(
             decorationBox = { innerTextField ->
                 if (textState.text.isEmpty()) {
                     Text(
-                        text = stringResource(id = R.string.compose_subject_hint),
+                        text = stringResource(id = R.string.compose_body_hint),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        style = MaterialTheme.typography.titleLarge
+                        style = MaterialTheme.typography.bodyLarge
                     )
                 }
                 innerTextField()
             },
-            textStyle = MaterialTheme.typography.titleLarge.copy(
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+            textStyle = MaterialTheme.typography.bodyLarge.copy(
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                lineHeight = 24.sp
             ),
         )
-        IconButton(onClick = { onClick("Send") }) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_twotone_send),
-                contentDescription = stringResource(id = R.string.compose_send_content_desc),
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
     }
 }
 
@@ -91,10 +74,8 @@ fun SubjectWidget(
     name = "Day"
 )
 @Composable
-fun SubjectWidgetPreview() {
+fun MessageFieldWidgetPreview() {
     ReplyComposeTheme {
-        SubjectWidget {
-
-        }
+        MessageFieldWidget()
     }
 }

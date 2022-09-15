@@ -37,3 +37,8 @@ val replyBlue50Alpha060 = Color(0x99eef0f2)
 val replyBlack900Alpha020 = Color(0x33000000)
 val replyBlack900Alpha087 = Color(0xde000000)
 val replyBlack900Alpha060 = Color(0x99000000)
+
+
+val emphasisMediumAlpha = 0.60f
+val emphasisHighAlpha = 0.87f
+val emphasisDisabledAlpha = 0.38f

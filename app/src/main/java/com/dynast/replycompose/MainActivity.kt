@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.dynast.replycompose.ui.compose.ComposeContent
+import com.dynast.replycompose.ui.search.SearchContent
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
 
 class MainActivity : ComponentActivity() {
