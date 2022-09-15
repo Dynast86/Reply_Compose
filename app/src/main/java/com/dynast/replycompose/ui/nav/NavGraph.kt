@@ -28,7 +28,7 @@ fun NavGraph(
             ComposeContent { navController.navigation(NavItem.Home) }
         }
         composable(NavItem.Email.route) {
-            EmailContent()
+            EmailContent { navController.navigation(NavItem.Home) }
         }
     }
 }
