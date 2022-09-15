@@ -1,6 +1,7 @@
 package com.dynast.replycompose.ui.compose
 
 import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.DropdownMenuItem
@@ -41,7 +42,9 @@ fun DropdownMenuWidget(
                 .padding(horizontal = 8.dp), text = emailValue
         )
         DropdownMenu(
-            modifier = Modifier.widthIn(min = 340.dp),
+            modifier = Modifier
+                .widthIn(min = 340.dp)
+                .background(MaterialTheme.colorScheme.surface),
             expanded = isOpen, onDismissRequest = { isOpen = false }) {
             allUserAccounts.forEach {
                 DropdownMenuItem(
