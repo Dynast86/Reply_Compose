@@ -79,7 +79,7 @@ private val horizontalPadding = 8.dp
 @Composable
 fun RecipientChipPreview() {
     ReplyComposeTheme {
-        RecipientChip(avatar = painterResource(id = R.drawable.dummy)) {
+        RecipientChip(avatar = painterResource(id = R.drawable.dummy_0)) {
 
         }
     }

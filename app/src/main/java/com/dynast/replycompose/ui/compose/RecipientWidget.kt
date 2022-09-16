@@ -23,7 +23,7 @@ fun RecipientWidget(
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier.padding(horizontal = 8.dp)) {
-        val painter = rememberAsyncImagePainter(R.drawable.dummy)
+        val painter = rememberAsyncImagePainter(R.drawable.dummy_0)
         LazyRow(modifier = modifier.weight(1f)) {
             items(3) {
                 RecipientChip(avatar = painter) {}

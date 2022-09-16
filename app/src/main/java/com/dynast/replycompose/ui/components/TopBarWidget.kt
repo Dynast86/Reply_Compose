@@ -1,5 +1,6 @@
 package com.dynast.replycompose.ui.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -49,7 +50,7 @@ fun TopBarWidget(
         IconButton(onClick = { onClick(NavItem.Close) }) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_arrow_back),
-                contentDescription = "Close",
+                contentDescription = NavItem.Close.route,
                 tint = MaterialTheme.colorScheme.primary
             )
         }
@@ -88,7 +89,17 @@ fun TopBarWidget(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "Night",
+    backgroundColor = 0xFF000000
+)
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    name = "Day"
+)
 @Composable
 fun TopBarWidgetPreview() {
     ReplyComposeTheme {

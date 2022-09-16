@@ -17,7 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dynast.replycompose.R
-import com.dynast.replycompose.temp.compose.allUserAccounts
+import com.dynast.replycompose.data.compose.allUserAccounts
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
 import com.dynast.replycompose.ui.theme.emphasisDisabledAlpha
 
@@ -39,7 +39,9 @@ fun DropdownMenuWidget(
         Text(
             modifier = Modifier
                 .weight(1f)
-                .padding(horizontal = 8.dp), text = emailValue
+                .padding(horizontal = 8.dp),
+            text = emailValue,
+            color = MaterialTheme.colorScheme.onSurface
         )
         DropdownMenu(
             modifier = Modifier
@@ -53,7 +55,10 @@ fun DropdownMenuWidget(
                         emailValue = it.email
                     }
                 ) {
-                    Text(text = it.email)
+                    Text(
+                        text = it.email,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
                 }
             }
         }

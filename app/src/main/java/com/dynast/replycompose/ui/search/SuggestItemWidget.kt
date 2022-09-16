@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.dynast.replycompose.temp.search.SearchSuggestion
+import com.dynast.replycompose.data.search.SearchSuggestion
 
 @Composable
 fun SuggestItemWidget(

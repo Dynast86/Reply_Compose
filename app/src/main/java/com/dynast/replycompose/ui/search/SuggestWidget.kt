@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.dynast.replycompose.temp.search.SearchSuggestion
+import com.dynast.replycompose.data.search.SearchSuggestion
 
 @Composable
 fun SuggestWidget(
