@@ -18,6 +18,7 @@ import com.dynast.replycompose.R
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
 import com.dynast.replycompose.ui.theme.emphasisHighAlpha
 import com.dynast.replycompose.ui.theme.emphasisMediumAlpha
+import com.dynast.replycompose.ui.theme.profileImageSize
 
 @Composable
 fun EmailSenderWidget(
@@ -58,8 +59,6 @@ fun EmailSenderWidget(
         )
     }
 }
-
-private val profileImageSize = 42.dp
 
 @Preview(
     showBackground = true,

@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.dynast.replycompose.data.email.Email
-import com.dynast.replycompose.data.email.allEmails
+import com.dynast.replycompose.data.email.EmailStore
 import com.dynast.replycompose.ui.components.EmailFormWidget
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
 import com.dynast.replycompose.ui.theme.emphasisHighAlpha
@@ -61,8 +61,10 @@ fun EmailContent(
 @Composable
 fun EmailContentPreview() {
     ReplyComposeTheme {
-        EmailContent(item = allEmails[0]) {
+        EmailStore.get(0)?.let {
+            EmailContent(item = it) {
 
+            }
         }
     }
 }

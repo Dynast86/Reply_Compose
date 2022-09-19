@@ -8,6 +8,8 @@ val SmallComponentCornerRadius = 24.dp
 val MediumComponentCornerRadius = 0.dp
 val LargeComponentCornerRadius = 12.dp
 
+val profileImageSize = 42.dp
+
 val Shapes = Shapes(
     small = RoundedCornerShape(SmallComponentCornerRadius),
     medium = RoundedCornerShape(MediumComponentCornerRadius),
