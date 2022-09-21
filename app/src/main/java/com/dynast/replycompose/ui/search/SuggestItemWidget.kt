@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dynast.replycompose.data.search.SearchSuggestion
 
@@ -31,7 +32,7 @@ fun SuggestItemWidget(
         ) {
             Image(
                 painter = painterResource(id = item.iconResId),
-                contentDescription = "Icon",
+                contentDescription = item.title,
                 colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
             )
             Column(modifier = Modifier.padding(start = 16.dp)) {

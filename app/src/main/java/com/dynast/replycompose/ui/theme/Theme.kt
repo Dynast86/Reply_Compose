@@ -26,6 +26,7 @@ private val DarkColorScheme = darkColorScheme(
     onSurface = replyWhite50,
     onError = replyBlack900,
 
+    primaryContainer = replyBlack800
 //<item name="colorPrimaryVariant">@color/reply_blue_300</item>
 //<item name="colorPrimarySurfaceVariant">?attr/colorSurface</item>
 )
@@ -44,6 +45,8 @@ private val LightColorScheme = lightColorScheme(
     onBackground = replyBlack900,
     onSurface = replyBlack900,
     onError = replyBlack900,
+
+    primaryContainer = replyBlue800
 
 
     /* Other default colors to override

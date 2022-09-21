@@ -179,37 +179,6 @@ object EmailStore {
         emptyList()
     )
 
-//    private val index: Flow<List<Email>>
-//        get() = _emails.map { value: List<Email> ->
-//            value.filter { it.mailbox == Mailbox.INBOX }
-//        }
-//
-//    private val starred: Flow<List<Email>>
-//        get() = _emails.map { value: List<Email> ->
-//            value.filter { it.isStarred }
-//        }
-//
-//
-//    private val sent: Flow<List<Email>>
-//        get() = _emails.map { value: List<Email> ->
-//            value.filter { it.mailbox == Mailbox.SENT }
-//        }
-//
-//    private val trash: Flow<List<Email>>
-//        get() = _emails.map { value: List<Email> ->
-//            value.filter { it.mailbox == Mailbox.TRASH }
-//        }
-//
-//    private val spam: Flow<List<Email>>
-//        get() = _emails.map { value: List<Email> ->
-//            value.filter { it.mailbox == Mailbox.SPAM }
-//        }
-//
-//    private val drafts: Flow<List<Email>>
-//        get() = _emails.map { value: List<Email> ->
-//            value.filter { it.mailbox == Mailbox.DRAFTS }
-//        }
-
     private val index: StateFlow<List<Email>>
         get() = _emails.apply { value.filter { it.mailbox == Mailbox.INBOX } }
 

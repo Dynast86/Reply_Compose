@@ -67,7 +67,8 @@ val Typography = Typography(
         fontSize = 24.sp
     ),
     titleMedium = TextStyle(
-        fontFamily = fontFamily
+        fontFamily = fontFamily,
+        fontSize = 16.sp
     ),
     titleSmall = TextStyle(
         fontFamily = fontFamily,

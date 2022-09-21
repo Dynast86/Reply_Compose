@@ -19,16 +19,9 @@ import androidx.compose.ui.unit.dp
 import com.dynast.replycompose.data.BottomMenu
 import com.dynast.replycompose.ui.theme.emphasisMediumAlpha
 
-private val list = listOf(
-    BottomMenu.Forward, BottomMenu.Reply, BottomMenu.ReplyAll, BottomMenu.Archive, BottomMenu.Delete
-)
-
-//private val list = listOf(
-//    BottomMenu.Light, BottomMenu.Dark, BottomMenu.SystemDefault
-//)
-
 @Composable
 fun MenuSheetWidget(
+    list: List<BottomMenu>,
     onClick: (BottomMenu) -> Unit
 ) {
     LazyColumn(modifier = Modifier.padding(vertical = 24.dp)) {
