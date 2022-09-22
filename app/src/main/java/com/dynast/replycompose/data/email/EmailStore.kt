@@ -18,8 +18,8 @@ package com.dynast.replycompose.data.email
 
 import com.dynast.replycompose.R
 import com.dynast.replycompose.data.compose.Account
-import com.dynast.replycompose.data.compose.allUserAccounts
-import com.dynast.replycompose.data.compose.allUserContactAccounts
+import com.dynast.replycompose.data.compose.AccountStore.allUserAccounts
+import com.dynast.replycompose.data.compose.AccountStore.allUserContactAccounts
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

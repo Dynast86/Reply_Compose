@@ -14,19 +14,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dynast.replycompose.R
+import com.dynast.replycompose.data.compose.Account
+import com.dynast.replycompose.data.email.EmailStore
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RecipientChip(
     modifier: Modifier = Modifier,
-    avatar: Painter,
+    item: Account,
     onClick: () -> Unit
 ) {
     Surface(
@@ -49,12 +49,12 @@ fun RecipientChip(
                 modifier = Modifier
                     .size(32.dp)
                     .clip(CircleShape),
-                painter = avatar, contentDescription = "Avatar",
+                painter = painterResource(id = item.avatar), contentDescription = item.fullName,
                 contentScale = ContentScale.Crop
             )
             Spacer(Modifier.width(horizontalPadding))
             Text(
-                text = "박보영 임당!!!!",
+                text = item.fullName,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.labelLarge
             )
@@ -79,7 +79,7 @@ private val horizontalPadding = 8.dp
 @Composable
 fun RecipientChipPreview() {
     ReplyComposeTheme {
-        RecipientChip(avatar = painterResource(id = R.drawable.dummy_0)) {
+        RecipientChip(item = listOf(EmailStore.getDefaultUserAccount())[0]) {
 
         }
     }

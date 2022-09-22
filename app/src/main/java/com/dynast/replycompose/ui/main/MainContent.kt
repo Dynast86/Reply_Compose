@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -24,7 +25,6 @@ import com.dynast.replycompose.ui.home.MenuSheetWidget
 import com.dynast.replycompose.ui.nav.NavGraph
 import com.dynast.replycompose.ui.nav.NavItem
 import com.dynast.replycompose.ui.nav.navigation
-import com.dynast.replycompose.ui.nav.state.SandwichState
 import com.dynast.replycompose.ui.nav.state.rememberMainState
 import com.dynast.replycompose.ui.theme.replyWhite50Alpha060
 import kotlinx.coroutines.launch
@@ -39,22 +39,27 @@ fun MainContent() {
     val currentRoute = navBackStackEntry?.destination?.route
     val scope = rememberCoroutineScope()
 
-    val sandwichBottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
-
     var currentRotation by remember { mutableStateOf(180f) }
     val rotation = remember { Animatable(currentRotation) }
 
     LaunchedEffect(Unit) {
-        snapshotFlow { mainState.sandwichState.targetState }.collect {
+        snapshotFlow { mainState.sandwichBottomSheetState.targetValue }.collect {
             rotation.animateTo(
                 targetValue = currentRotation + 180f
             ) {
                 currentRotation = value
             }
-            with(sandwichBottomSheetState) {
-                if (it == SandwichState.Open) show() else hide()
-            }
         }
+//        snapshotFlow { mainState.sandwichState.targetState }.collect {
+//            rotation.animateTo(
+//                targetValue = currentRotation + 180f
+//            ) {
+//                currentRotation = value
+//            }
+//            with(sandwichBottomSheetState) {
+//                if (it == SandwichState.Open) show() else hide()
+//            }
+//        }
     }
 
     LaunchedEffect(Unit) {
@@ -66,7 +71,6 @@ fun MainContent() {
             }
         }
     }
-
 
     Scaffold(
         floatingActionButton = {
@@ -130,7 +134,6 @@ fun MainContent() {
                 BottomBarWidget(
                     navController = navController,
                     mainState = mainState,
-                    sandwichState = mainState.sandwichState,
                     rotation = rotation.value
                 )
             }
@@ -149,33 +152,25 @@ fun MainContent() {
             }
         )
         ModalBottomSheetLayout(
-            sheetState = sandwichBottomSheetState,
+            sheetState = mainState.sandwichBottomSheetState,
             sheetContent = {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(paddingValues)
                 ) {
-                    SandwichWidget(state = sandwichBottomSheetState.currentValue)
+                    SandwichWidget(state = mainState.sandwichBottomSheetState)
                 }
             },
             sheetElevation = 8.dp,
             sheetBackgroundColor = MaterialTheme.colorScheme.primaryContainer,
-            sheetShape = MaterialTheme.shapes.large,
+            sheetShape = if (mainState.sandwichBottomSheetState.currentValue == ModalBottomSheetValue.Expanded) {
+                RectangleShape
+            } else {
+                MaterialTheme.shapes.large
+            },
             scrimColor = replyWhite50Alpha060,
-            content = {
-
-            })
-//        Surface(elevation = 6.dp, color = Color.LightGray) {
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(100.dp)
-//                    .padding(paddingValues)
-//            ) {
-//                Text(text = "!!!!!!")
-//            }
-//        }
+            content = {})
     }
 
     BottomSheetContent(state = mainState.bottomSheetState) {

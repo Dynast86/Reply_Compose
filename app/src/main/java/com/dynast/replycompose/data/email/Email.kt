@@ -1,7 +1,7 @@
 package com.dynast.replycompose.data.email
 
 import com.dynast.replycompose.data.compose.Account
-import com.dynast.replycompose.data.compose.isUserAccount
+import com.dynast.replycompose.data.compose.AccountStore.isUserAccount
 
 data class Email(
     val id: Long,

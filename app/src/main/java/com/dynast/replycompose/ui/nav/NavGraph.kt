@@ -1,6 +1,5 @@
 package com.dynast.replycompose.ui.nav
 
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -13,10 +12,8 @@ import com.dynast.replycompose.data.email.Mailbox
 import com.dynast.replycompose.ui.compose.ComposeContent
 import com.dynast.replycompose.ui.email.EmailContent
 import com.dynast.replycompose.ui.home.HomeContent
-import com.dynast.replycompose.ui.nav.state.rememberMainState
 import com.dynast.replycompose.ui.search.SearchContent
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun NavGraph(
     modifier: Modifier = Modifier,

@@ -15,5 +15,5 @@ class MainState(
     val fabState: MutableTransitionState<Boolean>,
     val bottomSheetState: ModalBottomSheetState,
     val bottomMenus: MutableState<List<BottomMenu>>,
-    val sandwichState: MutableTransitionState<SandwichState>
+    val sandwichBottomSheetState: ModalBottomSheetState
 )

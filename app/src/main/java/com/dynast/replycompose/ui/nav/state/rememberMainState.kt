@@ -22,13 +22,14 @@ fun rememberMainState(
     bottomMenus: MutableState<List<BottomMenu>> = remember {
         mutableStateOf(listOf(BottomMenu.Forward, BottomMenu.Reply, BottomMenu.ReplyAll, BottomMenu.Archive, BottomMenu.Delete))
     },
-    sandwichState: MutableTransitionState<SandwichState> = remember { MutableTransitionState(initialState = SandwichState.Closed) }
+//    sandwichState: MutableTransitionState<SandwichState> = remember { MutableTransitionState(initialState = SandwichState.Closed) }
+    sandwichBottomSheetState: ModalBottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 ): MainState = remember {
     MainState(
         navController = navController,
         fabState = fabState,
         bottomSheetState = bottomSheetState,
         bottomMenus = bottomMenus,
-        sandwichState = sandwichState
+        sandwichBottomSheetState = sandwichBottomSheetState
     )
 }

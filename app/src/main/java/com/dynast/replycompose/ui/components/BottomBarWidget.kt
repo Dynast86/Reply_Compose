@@ -1,6 +1,5 @@
 package com.dynast.replycompose.ui.components
 
-import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,10 +8,13 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +31,6 @@ import com.dynast.replycompose.data.BottomMenu
 import com.dynast.replycompose.ui.nav.NavItem
 import com.dynast.replycompose.ui.nav.navigation
 import com.dynast.replycompose.ui.nav.state.MainState
-import com.dynast.replycompose.ui.nav.state.SandwichState
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -38,10 +39,12 @@ fun BottomBarWidget(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     mainState: MainState,
-    sandwichState: MutableTransitionState<SandwichState>,
     rotation: Float = 0f
 ) {
     val scope = rememberCoroutineScope()
+    val alphaState = remember {
+        derivedStateOf { if (mainState.sandwichBottomSheetState.currentValue == ModalBottomSheetValue.Hidden) 1f else 0f }
+    }
 
     BottomAppBar(
         cutoutShape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
@@ -53,11 +56,15 @@ fun BottomBarWidget(
                 .padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
                 .clip(CircleShape)
                 .clickable {
-                    with(sandwichState) {
-                        targetState = if (targetState == SandwichState.Open) {
-                            SandwichState.Closed
-                        } else {
-                            SandwichState.Open
+                    scope.launch {
+                        with(mainState) {
+                            fabState.targetState = if (sandwichBottomSheetState.currentValue == ModalBottomSheetValue.Hidden) {
+                                sandwichBottomSheetState.show()
+                                false
+                            } else {
+                                sandwichBottomSheetState.hide()
+                                true
+                            }
                         }
                     }
                 },
@@ -80,23 +87,22 @@ fun BottomBarWidget(
             Text(
                 modifier = Modifier
                     .padding(horizontal = 8.dp)
-                    .then(
-                        Modifier.alpha(
-                            if (sandwichState.targetState == SandwichState.Closed) 1f else 0f
-                        )
-                    ),
+                    .alpha(alphaState.value),
                 text = stringResource(id = R.string.navigation_inbox),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimary
             )
         }
         Spacer(modifier = Modifier.weight(1f))
-        if (sandwichState.targetState == SandwichState.Open) {
+        if (mainState.sandwichBottomSheetState.currentValue != ModalBottomSheetValue.Hidden) {
             IconButton(onClick = {
-                sandwichState.targetState = SandwichState.Closed
-                scope.launch {
-                    mainState.bottomMenus.value = settingsList
-                    mainState.bottomSheetState.show()
+                with(mainState) {
+                    scope.launch {
+                        sandwichBottomSheetState.hide()
+                        bottomMenus.value = settingsList
+                        bottomSheetState.show()
+                        fabState.targetState = sandwichBottomSheetState.currentValue == ModalBottomSheetValue.Hidden
+                    }
                 }
             }) {
                 Icon(

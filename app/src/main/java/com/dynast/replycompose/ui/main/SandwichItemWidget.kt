@@ -18,17 +18,19 @@ import androidx.compose.ui.unit.dp
 import com.dynast.replycompose.R
 import com.dynast.replycompose.ui.nav.NavigationModelItem
 import com.dynast.replycompose.ui.theme.emphasisMediumAlpha
+import com.dynast.replycompose.ui.theme.listItemHeight
 
 @Composable
 fun SandwichItemWidget(
-    item: NavigationModelItem
+    item: NavigationModelItem,
+    onClick: () -> Unit
 ) {
     when (item) {
         is NavigationModelItem.NavEmailFolder -> {
             Row(modifier = Modifier
                 .fillMaxWidth()
-                .height(itemHeight)
-                .clickable { }
+                .height(listItemHeight)
+                .clickable { onClick() }
                 .padding(horizontal = 32.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -74,8 +76,8 @@ fun SandwichItemWidget(
             }
             Row(modifier = Modifier
                 .fillMaxWidth()
-                .height(itemHeight)
-                .clickable { }
+                .height(listItemHeight)
+                .clickable { onClick() }
                 .padding(horizontal = 32.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -100,5 +102,3 @@ fun SandwichItemWidget(
         }
     }
 }
-
-private val itemHeight = 56.dp

@@ -1,10 +1,8 @@
 package com.dynast.replycompose.data.email
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.dynast.replycompose.R
-import com.dynast.replycompose.data.compose.getContactAccountById
-import com.dynast.replycompose.data.compose.getDefaultUserAccount
+import com.dynast.replycompose.data.compose.AccountStore.getContactAccountById
+import com.dynast.replycompose.data.compose.AccountStore.getDefaultUserAccount
 
 val allEmails = mutableListOf(
     Email(

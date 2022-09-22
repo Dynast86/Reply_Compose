@@ -3,7 +3,6 @@ package com.dynast.replycompose.ui.search
 import android.content.res.Configuration
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.dynast.replycompose.R
 import com.dynast.replycompose.data.search.thisWeekSuggestions
@@ -11,9 +10,7 @@ import com.dynast.replycompose.data.search.yesterdaySuggestions
 import com.dynast.replycompose.ui.theme.ReplyComposeTheme
 
 @Composable
-fun SearchContent(
-    modifier: Modifier = Modifier
-) {
+fun SearchContent() {
     LazyColumn {
         item {
             SuggestWidget(title = R.string.search_suggestion_title_yesterday, suggest = yesterdaySuggestions)

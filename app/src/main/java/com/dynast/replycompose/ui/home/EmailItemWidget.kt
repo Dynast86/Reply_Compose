@@ -33,6 +33,12 @@ fun EmailItemWidget(
     val haptic = LocalHapticFeedback.current
     val avatar = rememberAsyncImagePainter(model = item.sender.avatar)
 
+    val shapeModifier = if (item.isStarred) {
+        Modifier.background(color = MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(topStart = 24.dp))
+    } else {
+        Modifier.background(color = MaterialTheme.colorScheme.surface)
+    }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,17 +51,9 @@ fun EmailItemWidget(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .then(
-                    if (item.isStarred) {
-                        Modifier.background(color = MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(topStart = 24.dp))
-                    } else {
-                        Modifier.background(color = MaterialTheme.colorScheme.surface)
-                    }
-                )
+                .then(shapeModifier)
                 .combinedClickable(
-                    onClick = {
-                        onClick(item.id)
-                    },
+                    onClick = { onClick(item.id) },
                     onLongClick = {
                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                         onLongClick(item)
@@ -100,11 +98,9 @@ fun EmailItemWidget(
                     )
                 }
                 if (item.hasAttachments) {
-                    AttachmentWidget(
-                        modifier = Modifier
-                            .height(96.dp)
-                            .padding(top = 16.dp)
-                    )
+                    AttachmentWidget(modifier = Modifier
+                        .height(96.dp)
+                        .padding(top = 16.dp))
                 }
             }
         }
