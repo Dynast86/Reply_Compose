@@ -31,7 +31,6 @@ fun EmailItemWidget(
     onClick: (Long) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
-    val avatar = rememberAsyncImagePainter(model = item.sender.avatar)
 
     val shapeModifier = if (item.isStarred) {
         Modifier.background(color = MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(topStart = 24.dp))
@@ -83,7 +82,7 @@ fun EmailItemWidget(
                         modifier = Modifier
                             .size(profileImageSize)
                             .clip(CircleShape),
-                        painter = avatar,
+                        painter = rememberAsyncImagePainter(model = item.sender.avatar),
                         contentDescription = stringResource(id = R.string.email_sender_profile_content_desc),
                         contentScale = ContentScale.Crop
                     )
@@ -98,9 +97,12 @@ fun EmailItemWidget(
                     )
                 }
                 if (item.hasAttachments) {
-                    AttachmentWidget(modifier = Modifier
-                        .height(96.dp)
-                        .padding(top = 16.dp))
+                    AttachmentWidget(
+                        modifier = Modifier
+                            .height(96.dp)
+                            .padding(top = 16.dp),
+                        list = item.attachments
+                    )
                 }
             }
         }

@@ -23,8 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.dynast.replycompose.R
 import com.dynast.replycompose.data.compose.AccountStore
 import com.dynast.replycompose.ui.nav.NavigationModel
@@ -100,7 +100,7 @@ fun SandwichWidget(
                     .clickable {
                         viewState = 1
                     },
-                painter = painterResource(id = R.drawable.dummy_1),
+                painter = rememberAsyncImagePainter(model = R.drawable.dummy_1),
                 contentDescription = "",
                 contentScale = ContentScale.Crop
             )

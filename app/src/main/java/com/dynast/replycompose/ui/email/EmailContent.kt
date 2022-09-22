@@ -1,10 +1,7 @@
 package com.dynast.replycompose.ui.email
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,7 +39,15 @@ fun EmailContent(
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = emphasisHighAlpha)
             )
-            EmailAttachmentWidget()
+            if (item.hasAttachments) {
+                EmailAttachmentWidget(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .requiredHeightIn(min = 200.dp, max = 450.dp)
+                        .padding(top = 16.dp),
+                    list = item.attachments
+                )
+            }
         }
     }
 }

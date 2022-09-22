@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.dynast.replycompose.data.compose.Account
 import com.dynast.replycompose.ui.theme.emphasisMediumAlpha
 import com.dynast.replycompose.ui.theme.listItemHeight
@@ -42,7 +43,7 @@ fun AccountItemWidget(
             modifier = Modifier
                 .size(32.dp)
                 .clip(CircleShape),
-            painter = painterResource(id = item.avatar), contentDescription = item.email,
+            painter = rememberAsyncImagePainter(model = item.avatar), contentDescription = item.email,
             contentScale = ContentScale.Crop
         )
         Text(
